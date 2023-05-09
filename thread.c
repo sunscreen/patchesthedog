@@ -270,25 +270,6 @@ return;
 static void _catch_signals(void)
 {
 #if !defined(_WIN32) && !defined(__ANDROID__)
-//        sigset_t ss;
- 
-//        sigemptyset(&ss);
- 
-        /* These ones should only be accepted by the signal handling thread (main thread) */
-//        sigaddset(&ss, SIGHUP);
-//        sigaddset(&ss, SIGCHLD);
-//        sigaddset(&ss, SIGINT);
-//        sigaddset(&ss, SIGPIPE);
-//        sigaddset(&ss, SIGTERM);
- 
-//        if (pthread_sigmask(SIG_UNBLOCK, &ss, NULL) != 0) {
-//#ifdef THREAD_DEBUG
-//                LOG_ERROR("pthread_sigmask() failed for catching signals!");
-//#endif
-//        }
- 
- 
- 
     struct sigaction sa;
     struct sigaction chksa;
  
