@@ -1310,11 +1310,11 @@ static void command_public_stats        (client_t *client, source_t *source, adm
 
 static void command_queue_reload(client_t *client, source_t *source, admin_format_t response)
 {
-    global_lock();
+    //global_lock();
 //    global.schedule_config_reread = 1;
-    config_reread_config();
-    global_unlock();
-
+    //config_reread_config();
+    //global_unlock();
+    raise(SIGHUP);
     admin_send_response_simple(client, source, response, "Config reload queued", 1);
 }
 
