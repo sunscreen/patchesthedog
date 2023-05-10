@@ -1315,10 +1315,10 @@ static void command_queue_reload(client_t *client, source_t *source, admin_forma
     raise(SIGHUP);
     #else 
     /* other platforms remain broken for now */
-    global_lock(); 
-    global.schedule_config_reread = 1;
+    //global_lock(); we dont lock here any more in this code anyway.
+    //global.schedule_config_reread = 1; we dont schedule a HUP because theres no need to.
     config_reread_config();
-    global_unlock();
+    //global_unlock();
     #endif
     admin_send_response_simple(client, source, response, "Config reload queued", 1);
 }
