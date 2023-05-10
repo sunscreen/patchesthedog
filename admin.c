@@ -1310,11 +1310,16 @@ static void command_public_stats        (client_t *client, source_t *source, adm
 
 static void command_queue_reload(client_t *client, source_t *source, admin_format_t response)
 {
-    //global_lock();
-//    global.schedule_config_reread = 1;
-    //config_reread_config();
-    //global_unlock();
+    #ifdef !defined(_WIN32) && !defined(__ANDROID) {
+    /* Linux and BSD */
     raise(SIGHUP);
+    #else 
+    /* other platforms remain broken for now */
+    global_lock(); 
+    global.schedule_config_reread = 1;
+    config_reread_config();
+    global_unlock();
+    #endif
     admin_send_response_simple(client, source, response, "Config reload queued", 1);
 }
 
